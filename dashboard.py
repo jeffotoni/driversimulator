@@ -97,6 +97,7 @@ def garantir_config_v2(cfg: Dict[str, Any]) -> None:
             "reserva_bateria_percentual",
             "tempo_medio_recarga_min",
             "consumo_combustivel_km_l",
+            "vida_util_km",
             "combustivel_default_litro",
             "capacidade_tanque_l",
         ):
@@ -548,6 +549,7 @@ if aba_ativa == "Configurar":
                     key="veic_consumo_combustivel",
                 )
 
+        vida_util_fmt = f"{int(cfg['veiculo']['vida_util_km']):,}".replace(",", ".")
         ficha_df = pd.DataFrame(
             [
                 {"Campo": "Modelo", "Valor": cfg["veiculo"]["modelo"]},
@@ -561,6 +563,7 @@ if aba_ativa == "Configurar":
                 },
                 {"Campo": "Potência", "Valor": f"{cfg['veiculo']['potencia_cv']} cv"},
                 {"Campo": "Consumo", "Valor": f"{cfg['veiculo']['consumo_kwh_por_km']:.3f} kWh/km"},
+                {"Campo": "Vida útil padrão", "Valor": f"{vida_util_fmt} km"},
                 {"Campo": "Valor do veículo", "Valor": moeda(cfg["veiculo"]["preco_veiculo"])},
             ]
         )

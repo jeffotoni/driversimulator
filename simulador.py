@@ -49,6 +49,24 @@ def _tempo_recarga_padrao(propulsao: str, bateria_kwh: float) -> float:
 
 
 def catalogo_veiculos() -> Dict[str, Dict[str, Any]]:
+    vida_util_por_modelo_km = {
+        "BYD Atto 2": 400000.0,
+        "BYD Dolphin GS (Tradicional)": 400000.0,
+        "BYD Dolphin Mini (GL - Entrada)": 350000.0,
+        "BYD Dolphin Mini (GS - Plus)": 350000.0,
+        "BYD Dolphin Plus": 450000.0,
+        "BYD Dolphin Special Edition (SE)": 450000.0,
+        "BYD Han": 600000.0,
+        "BYD King (GL/GS)": 450000.0,
+        "BYD Seal": 600000.0,
+        "BYD Shark": 500000.0,
+        "BYD Song Plus": 500000.0,
+        "BYD Song Pro (GL/GS)": 450000.0,
+        "BYD Tan": 600000.0,
+        "BYD Yuan Plus": 500000.0,
+        "BYD Yuan Pro": 450000.0,
+    }
+
     veiculos: List[Dict[str, Any]] = [
         {
             "modelo": "BYD Atto 2",
@@ -230,7 +248,7 @@ def catalogo_veiculos() -> Dict[str, Dict[str, Any]]:
     out: Dict[str, Dict[str, Any]] = {}
     for v in veiculos:
         item = copy.deepcopy(v)
-        item.setdefault("vida_util_km", 400000.0)
+        item["vida_util_km"] = float(vida_util_por_modelo_km.get(item["modelo"], 400000.0))
         item["autonomia_oficial_km"] = item["autonomia_eletrica_km"]
         if item["propulsao"] == "PHEV" and item.get("autonomia_total_km"):
             item["autonomia_operacional_km"] = item["autonomia_total_km"]
